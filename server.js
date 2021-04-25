@@ -22,20 +22,22 @@ app.get("/kidoshitekure", (req, res) => {
   res.send("sever started");
 });
 
-app.post("/api/contact", (req, res) => {
-  const _contact = new contact({
-    name: req.body.name,
-    text: req.body.text,
-  });
-  _contact.save((err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
+app.post("/api/contact", async (req, res) => {
+  // const _contact = new contact({
+  //   name: req.body.name,
+  //   text: req.body.text,
+  // });
+  // _contact.save((err) => {
+  //   if (err) {
+  //     console.error(err);
+  //   }
+  // });
   contactCount++;
   console.log(contactCount);
-  sendMail(req.body.name, req.body.text);
-  res.status(200).send("done");
+
+  sendMail(req.body.name, req.body.text, () => {
+    res.status(200).send("done");
+  });
 });
 
 const server = app.listen(PORT, () => console.log("Running on " + PORT));
