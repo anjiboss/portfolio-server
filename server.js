@@ -12,7 +12,11 @@ app.use(express.json());
 connectDB();
 
 app.get("/", (req, res) => {
-  res.send("You are On Home");
+  res.send("You not suppose to request like this ;>");
+});
+
+app.get("/kidoshitekure", (req, res) => {
+  res.send("sever started");
 });
 
 app.post("/api/contact", (req, res) => {
