@@ -4,7 +4,6 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 const sendMail = require("./utils/sendMail");
-const fs = require("fs");
 
 let watchCount = 0;
 let writeData;
@@ -16,22 +15,19 @@ app.use(express.json());
 app.get("/", (req, res) => {
   watchCount++;
   writeData = `New Watch Count: ${watchCount}`;
-  fs.writeFile("watchCount.txt", writeData, (err) => {
-    if (err) return console.log(err);
-    console.log(watchCount);
+  sendMail("Bot", "writeData", () => {
+    console.log("Req times Sent");
   });
-
   res.send("You not suppose to request like this ;>");
 });
 
 app.get("/kidoshitekure", (req, res) => {
   watchCount++;
   writeData = `New Watch Count: ${watchCount}`;
-  fs.writeFile("watchCount.txt", writeData, (err) => {
-    if (err) return console.log(err);
-    console.log(watchCount);
-  });
 
+  sendMail("Bot", "writeData", () => {
+    console.log("Req times Sent");
+  });
   res.send("sever started");
 });
 
