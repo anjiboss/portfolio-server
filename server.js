@@ -15,7 +15,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   watchCount++;
   writeData = `New Watch Count: ${watchCount}`;
-  sendMail("Bot", "writeData", () => {
+  sendMail("Bot", writeData, () => {
     console.log("Req times Sent");
   });
   res.send("You not suppose to request like this ;>");
@@ -25,7 +25,7 @@ app.get("/kidoshitekure", (req, res) => {
   watchCount++;
   writeData = `New Watch Count: ${watchCount}`;
 
-  sendMail("Bot", "writeData", () => {
+  sendMail("Bot", writeData, () => {
     console.log("Req times Sent");
   });
   res.send("sever started");
